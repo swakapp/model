@@ -1,2 +1,2 @@
 # model
-Swak entity protobuf definitions
+Swak entity protobuf definitions.
