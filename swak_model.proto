@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message Topic {
+    string id = 1;
+    string headline = 2;
+    string body = 3;
+    TopicMeta meta = 4;
+}
+
+message TopicMeta {
+    string lang = 1;
+}
+
+message Comment {
+    string id = 1;
+    string text = 2;
+    CommentMeta meta = 3;
+}
+
+message CommentMeta {
+    string lang = 1;
+}
