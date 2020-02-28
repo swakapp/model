@@ -1,10 +1,17 @@
 syntax = "proto3";
 
+// FIXME: maybe have a "natural" or "native" View that a topic belongs to,
+// or maybe just an "original" View
+
+// FIXME: replace Topic body with Content union, for text, image, other data types.
+
 message Topic {
+    // id is implementation-dependent, e.g. base64-encoded uuid
     string id = 1;
-    string headline = 2;
-    string body = 3;
-    TopicMeta meta = 4;
+    string main_view_id = 2;
+    string headline = 3;
+    string body = 4;
+    TopicMeta meta = 5;
 }
 
 message TopicMeta {
@@ -12,11 +19,34 @@ message TopicMeta {
 }
 
 message Comment {
+    // id is implementation-dependent, e.g. base64-encoded uuid
     string id = 1;
-    string text = 2;
-    CommentMeta meta = 3;
+    string topic_id = 2;
+    string text = 3;
+    CommentMeta meta = 4;
 }
 
 message CommentMeta {
     string lang = 1;
+} 
+
+message TopicNode {
+    string topic_id = 1;
+    repeated TopicNode child = 2;
+}
+
+message View {
+    string id = 1;
+    string description = 2;
+    TopicNode root = 3;
+}
+
+message CommentNode {
+    string comment_id = 1;
+    repeated CommentNode child = 2;
+}
+
+message Thread {
+    string id = 1;
+    CommentNode root = 2;
 }
